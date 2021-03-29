@@ -2,7 +2,6 @@
 (deffacts datos  
     	(numero_magico 21)
 	(lista 5 3 8 14 7)
-
 )
 
 
@@ -22,7 +21,7 @@
 =>
  
 (retract ?f1)
-(assert (lista $?a $?d (/ ?b ?c) ))
+(assert (lista $?a $?d ( / ?b ?c) ))
 )
 
 (defrule restar
@@ -35,10 +34,19 @@
 (assert (lista $?b $?d (- ?a ?c) ))
 )
 
+(defrule sumar
+ ?f1 <- (lista ?a ?b $?c $?d )
+ 
+=>
+ 
+(retract ?f1)
+(assert (lista (+ ?a ?b) ))
+)
+
 
 (defrule fin
     (declare (salience 99))
-    (lista ?a )
+    (lista $?a )
     (numero_magico ?m)
         (test (= ?m ?a))
     =>
